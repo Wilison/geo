@@ -7,37 +7,12 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-camera": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-console": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-contacts": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-device-motion": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-device-orientation": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    },
-    "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
+      "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
-  "dependent_plugins": {
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.phonegap.holawilson"
-    }
-  }
+  "dependent_plugins": {}
 }

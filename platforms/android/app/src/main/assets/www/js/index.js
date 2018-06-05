@@ -1,58 +1,25 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        this.bindEvents();
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
+
     // deviceready Event Handler
     //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
+    // Bind any cordova events here. Common events are:
+    // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        this.receivedEvent('deviceready');
     },
+
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        /*var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);*/
-
-
-        //navigator.camera.getPicture(onSuccess, onFail, { quality: 50,destinationType: Camera.DestinationType.FILE_URI });
-
-
-        // Get geo coordinates
-
-            alert("mapa de wilson");
-
-            navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, { enableHighAccuracy: true });
-
-
+        alert("mapa de wilson");
+        navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, { enableHighAccuracy: true });
     }
 };
-
-function onSuccess(imageURI) {
-    var image = document.getElementById('myImagewilson');
-    image.src = imageURI;
-}
-
-function onFail(message) {
-    alert('Failed because: ' + message);
-}
-
-
-
+/*var lati;
+var longi;*/
 var onMapSuccess = function (position) {
  
     alert("success");
@@ -60,21 +27,84 @@ var onMapSuccess = function (position) {
     Latitude = position.coords.latitude;
     Longitude = position.coords.longitude;
     alert("calculado");
+    //lati = Longitude;
+    //longi = Longitude;
 
     //getMap(Latitude, Longitude);
     alert(Latitude+ "//" +Longitude);
 
-    crearmapa(Latitude,Longitude);
+
+    var MiPosicion = new google.maps.LatLng(Latitude,Longitude);
+    var  map = new google.maps.Map(document.getElementById('map'), {
+          center: MiPosicion, //{lat: -34.397, lng: 150.644},     ------   -13.523620, -71.957265
+          zoom: 18
+        });
+
+     var marker = new google.maps.Marker(
+        {
+            position: MiPosicion,
+            map: map,
+            title: "mi posicion"
+        });
+
+     alert("mapa creado con google mapas satisfactoriamente");
+     //crearmapa(Latitude,Longitude);
+
+
+     //GRAFICAR UNA POLILINEA DE UN PUNTO A OTRO CON GOOGLE MAPS
+     var punto1 = MiPosicion;
+     var punto2 = new google.maps.LatLng(-13.523620,-71.957265);
+     var MiRuta = [punto1,punto2];
+     var TrazoVuelo = new google.maps.Polyline(
+         {
+             path: MiRuta,
+             strokeColor: "#0000FF",
+             strokeOpacity: 0.8,
+             strokeWeight: 3
+         });
+    TrazoVuelo.setMap(map);
+
+    //TRAZAR UNA RUTA EN AUTO DE UN PUNTO A OTRO CON GOOGLE MAPS
+    var ServiciosDireccion = new google.maps.DirectionsService();
+    var RenderizacionDireccion = new google.maps.DirectionsRenderer({
+        map: map
+    });
+    var objet = {
+        origin: MiPosicion,
+        destination: punto2,
+        travelMode: google.maps.TravelMode.WALKING //DRIVING
+    };
+    ServiciosDireccion.route(objet,FuncionRutear);
+    function FuncionRutear(resultados,estodo)
+    {
+        //mostrar la linea en A y B
+        if(estodo == "OK"){
+            RenderizacionDireccion.setDirections(resultados);
+        }
+        else{
+            alert("Error "+ estodo);
+        }
+    }
+
+    //AGREGAR EL LISTENER CLICK
+    map.addListener('click',function(event){
+        alert("Hizo click en: "+ event.latLng);
+    })
+    
 }
 
-function crearmapa(Latitude,Longitude){
-    var latLong = new google.maps.LatLng(Latitude,Longitude);
+function initMap(){
+
+    
+    alert("entro a initmap");
+
+    /*var latLong = new google.maps.LatLng(Latitude,Longitude);
     var mapOptions = {
         center: latLong,
         zoom: 11,
         mapTypeId: google.maps.mapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+    var map = new google.maps.Map(document.getElementById("map"),mapOptions);*/
 }
 
 function onMapError(error) {
@@ -84,36 +114,5 @@ function onMapError(error) {
 }
 
 
-/*$("#tg-map").gmap3({
+app.initialize();
 
-
-
-        marker: {
-
-            position: [-13.518016,-71.956899],
-
-            address: "Las Acllas, Cusco, Perú",
-
-            options: {
-
-                title: "SIWAR COEPRO E.I.R.L."
-
-            }
-
-        },
-
-        map: {
-
-            options: {
-
-                zoom: 16,
-
-                scrollwheel: false,
-
-                disableDoubleClickZoom: true
-
-            }
-
-        }
-
-    });*/
