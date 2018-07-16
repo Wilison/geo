@@ -1,4 +1,4 @@
-#Sun Feb 25 20:36:47 COT 2018
-base.0=D\:\\wilson\\phonegap\\geo\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Sun Jul 15 21:36:37 COT 2018
+base.0=D\:\\wilson\\phonegap\\git\\geo\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 renamed.0=classes.dex
-file.0=D\:\\wilson\\phonegap\\geo\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
+file.0=D\:\\wilson\\phonegap\\git\\geo\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

@@ -1,7 +1,13 @@
 var app = {
     // Application Constructor
     initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        //document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        // probando si funciona SQLite
+        document.addEventListener('deviceready', function() {
+            window.sqlitePlugin.selfTest(function() {
+                alert("Plugin SQLite funciona correctamente!");
+            });
+        });
     },
 
     // deviceready Event Handler
@@ -15,7 +21,9 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         alert("mapa de wilson");
+        //iniciando geolocalizacion
         navigator.geolocation.getCurrentPosition(onMapSuccess, onMapError, { enableHighAccuracy: true });
+        alert("Termino de ejecutarse");
     }
 };
 /*var lati;
